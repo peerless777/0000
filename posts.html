@@ -1,0 +1,36 @@
+{% extends 'base2.html' %}
+{% block content %}
+{% for message in get_flashed_messages()%}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+{% endfor %}
+<h1>Posts...</h1>
+<br/>
+{% for post in posts %}
+<div class="shadow p-3 mp-5 bg-body rounded">
+    <h2>{{ post.title }}</h2>
+    <small> By: {{ post.poster.username }}<br/>
+    {{ post.post_time }}<br/>
+    {{ post.slug }}</small><br/><br/>
+    {{ post.content }}
+    <br/><br/>
+    <a href="{{ url_for('post', id=post.id) }}" class="btn btn-outline-secondary btn-sm">View Post</a>
+{% if current_user.is_authenticated %}
+
+{% if current_user.id == post.poster_id %}
+
+    <a href="{{ url_for('edit_post', id=post.id) }}" class="btn btn-outline-secondary btn-sm">Edit Post</a>
+
+    <a href="{{ url_for('delete_post', id=post.id) }}" class="btn btn-outline-danger btn-sm">Delete Post</a>
+
+{% endif %}
+    
+<br/><br/> 
+{% else %}
+{% endif %}
+</div>
+<br/><br/>
+{% endfor %}
+{% endblock %}

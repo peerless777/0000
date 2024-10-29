@@ -1,0 +1,26 @@
+{% extends 'base2.html' %}
+
+{% block content %}
+
+
+    <h1>Hello Thir!</h1>
+
+
+    <p>This Is My Frist Web Bage I Have!!!</p>
+
+    <p>My Name Is {{ frist_name }}</p>
+
+    <h3>My Fevoret Pizza Is:</h3>
+
+    {% for pizza in fevoret_pizza %}
+        {% if pizza == 41 %}
+            {{ pizza + 100 }}
+        {% else %}
+            {{ pizza|title }}<br/>
+        {% endif %}
+    {% endfor %}
+
+    <br/><br/>
+    {{ fevoret_pizza.0|reverse }}
+
+{% endblock %}
